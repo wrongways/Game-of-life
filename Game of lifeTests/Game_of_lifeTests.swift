@@ -17,19 +17,52 @@ class Game_of_lifeTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    // MARK: - Integer mod extension
+    func testModZero() throws {
+        XCTAssert((0 %% 20) == 0, "Mod zero failed")
+    }
+    
+    func testModEqual() throws {
+        XCTAssert((10 %% 10) == 0, "Equal numerator denominator failed")
+    }
+    
+    func testModPositive() throws {
+        for numerator in 0...100 {
+            for modulus in 1...101 {
+                XCTAssert((numerator %% modulus) == (numerator % modulus), "Got a different result with \(numerator)/\(modulus)")
+            }
+        }
     }
 
-    func testPerformanceExample() throws {
+    func testModNegative() throws {
+        for numerator in [-3, -5, -7, -11, -13, -17] {
+            for modulus in 21...101 {
+                XCTAssert((numerator %% modulus) == (numerator % modulus) + modulus,
+                          "Got a different result with \(numerator)/\(modulus): \((numerator %% modulus)) != \((numerator % modulus) + modulus)")
+            }
+        }
+    }
+    
+    
+
+    
+    func testGameInit() throws {
+        let rows = 10
+        let cols = 100
+        let game = GameOfLife(size: CGSize(width: cols, height: rows))
+        XCTAssert((game._game[0][0] == .dead) || (game._game[0][0] == .alive) , "I'm a zombie")
+        XCTAssert(game._game.count == rows, "Wrong number of rows")
+        XCTAssert(game._game[0].count == cols, "Wrong number of columns")
+        XCTAssert(game.nCols == cols)
+        XCTAssert(game.nRows == rows)
+    }
+
+    func testPerformanceNeighbourCount() throws {
         // This is an example of a performance test case.
+        let game = GameOfLife(size: CGSize(width: 214, height: 14))
         self.measure {
-            // Put the code you want to measure the time of here.
+            _ = game.livingNeighboursCounts
         }
     }
 
