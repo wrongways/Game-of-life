@@ -15,7 +15,7 @@
 		ED79EDF7279B4D26002E4071 /* Game_of_lifeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED79EDF6279B4D26002E4071 /* Game_of_lifeTests.swift */; };
 		ED79EE10279B4DFE002E4071 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED79EE0F279B4DFE002E4071 /* GameModel.swift */; };
 		ED79EE12279B5700002E4071 /* Int+mod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED79EE11279B5700002E4071 /* Int+mod.swift */; };
-		ED79EE14279B6CDD002E4071 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED79EE13279B6CDD002E4071 /* GameCell.swift */; };
+		ED79EE16279B87A5002E4071 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED79EE15279B87A5002E4071 /* GameCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,7 @@
 		ED79EE02279B4D26002E4071 /* Game_of_lifeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game_of_lifeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		ED79EE0F279B4DFE002E4071 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		ED79EE11279B5700002E4071 /* Int+mod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+mod.swift"; sourceTree = "<group>"; };
-		ED79EE13279B6CDD002E4071 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		ED79EE15279B87A5002E4071 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +87,9 @@
 			children = (
 				ED79EDDE279B4D24002E4071 /* AppDelegate.swift */,
 				ED79EDE4279B4D24002E4071 /* GameScene.swift */,
+				ED79EE15279B87A5002E4071 /* GameCell.swift */,
 				ED79EDE6279B4D24002E4071 /* ViewController.swift */,
 				ED79EE0F279B4DFE002E4071 /* GameModel.swift */,
-				ED79EE13279B6CDD002E4071 /* GameCell.swift */,
 				ED79EE11279B5700002E4071 /* Int+mod.swift */,
 				ED79EDE8279B4D26002E4071 /* Assets.xcassets */,
 				ED79EDEA279B4D26002E4071 /* Main.storyboard */,
@@ -220,7 +220,7 @@
 				ED79EDE5279B4D24002E4071 /* GameScene.swift in Sources */,
 				ED79EE12279B5700002E4071 /* Int+mod.swift in Sources */,
 				ED79EDDF279B4D24002E4071 /* AppDelegate.swift in Sources */,
-				ED79EE14279B6CDD002E4071 /* GameCell.swift in Sources */,
+				ED79EE16279B87A5002E4071 /* GameCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
