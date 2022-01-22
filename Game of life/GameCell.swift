@@ -14,6 +14,16 @@ enum State {
 struct Cell {
     let row: Int
     let col: Int
-    var state: State = .dead
-    var neighbours: [Cell]      // has to be var, because set after all cells create
+    var state: State = .dead {
+        didSet {
+            if state != oldValue {
+                let increment = state == .alive ? 1 : -1
+                for index in neighbours.indices {
+                    neighbours[index].livingNeighboursCount += increment
+                }
+            }
+        }
+    }
+    var livingNeighboursCount = 0
+    var neighbours: [Cell]
 }
