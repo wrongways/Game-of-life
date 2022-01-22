@@ -29,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED6F2314279BC2860030193E /* Ideas.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = Ideas.md; path = "Game of life/Ideas.md"; sourceTree = "<group>"; };
 		ED79EDDB279B4D24002E4071 /* Game of life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game of life.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED79EDDE279B4D24002E4071 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED79EDE4279B4D24002E4071 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 		ED79EDD2279B4D24002E4071 = {
 			isa = PBXGroup;
 			children = (
+				ED6F2314279BC2860030193E /* Ideas.md */,
 				ED79EDDD279B4D24002E4071 /* Game of life */,
 				ED79EDF5279B4D26002E4071 /* Game of lifeTests */,
 				ED79EDFF279B4D26002E4071 /* Game of lifeUITests */,

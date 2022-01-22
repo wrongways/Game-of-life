@@ -46,6 +46,7 @@ class Game_of_lifeTests: XCTestCase {
     
     
 
+    // MARK: - Game tests
     
     func testGameInit() throws {
         let rows = 10
@@ -58,11 +59,14 @@ class Game_of_lifeTests: XCTestCase {
         XCTAssert(game.size.rows == rows)
     }
 
+    // MARK: - Performance tests
     func testPerformanceUpdate() throws {
         // This is an example of a performance test case.
-        var game = GameOfLife(size: GameSize(rows: 100, columns: 100))
+        var game = GameOfLife(size: GameSize(rows: 100, columns: 1000))
         self.measure {
-            game.update()
+            for _ in 0...10 {
+                game.update()
+            }
         }
     }
 
