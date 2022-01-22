@@ -22,8 +22,7 @@ struct GameOfLife {
         for rowNum in 0..<size.rows {
             var row = [Cell]()
             for colNum in 0..<size.columns {
-                let cellState: State = Int.random(in: 1...10) > 8 ? .alive : .dead
-                let newCell = Cell(row: rowNum, col: colNum, state: cellState, neighbours: [Cell]())
+                let newCell = Cell(row: rowNum, col: colNum, neighbours: [Cell]())
                 row.append(newCell)
             }
             _game.append(row)
@@ -33,6 +32,15 @@ struct GameOfLife {
         for row in _game {
             for cell in row {
                 _game[cell.row][cell.col].neighbours = neighboursFor(cell: cell)
+            }
+        }
+        
+        // Initialise the state, and as a repercussion, the living neighbours
+        for rowIndex in _game.indices {
+            for colIndex in _game[rowIndex].indices {
+                if Int.random(in: 1...10) > 8 {
+                    _game[rowIndex][colIndex].state = .alive
+                }
             }
         }
     }
@@ -56,18 +64,20 @@ struct GameOfLife {
     }
     
     mutating func update() {
+        var nextGame = _game
         for rowNum in 0..<size.rows {
             for colNum in 0..<size.columns {
-                let livingNeighbours = livingNeighboursCountFor(cell: _game[rowNum][colNum])
+                let livingNeighbours = nextGame[rowNum][colNum].livingNeighboursCount
                 switch livingNeighbours {
-                case 2...3 where _game[rowNum][colNum].state == .alive:
+                case 2...3 where nextGame[rowNum][colNum].state == .alive:
                     continue
-                case 3 where _game[rowNum][colNum].state == .dead:
-                    _game[rowNum][colNum].state = .alive
+                case 3 where nextGame[rowNum][colNum].state == .dead:
+                    nextGame[rowNum][colNum].state = .alive
                 default:
-                    _game[rowNum][colNum].state = .dead
+                    nextGame[rowNum][colNum].state = .dead
                 }
             }
         }
+        self._game = nextGame
     }
 }
