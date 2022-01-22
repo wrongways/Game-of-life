@@ -2,6 +2,9 @@
 
 Should create a separate branch for these
 
+## Corruption
+Update corrupts the game whilst updating. Need to make a copy and move the copy back to _game
+
 ## Classes
 Change structs to classes - perhaps pointers are faster than values?
 
