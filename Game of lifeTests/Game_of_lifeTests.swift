@@ -50,19 +50,19 @@ class Game_of_lifeTests: XCTestCase {
     func testGameInit() throws {
         let rows = 10
         let cols = 100
-        let game = GameOfLife(size: CGSize(width: cols, height: rows))
-        XCTAssert((game._game[0][0] == .dead) || (game._game[0][0] == .alive) , "I'm a zombie")
+        let game = GameOfLife(size: GameSize(rows: rows, columns: cols))
+        XCTAssert((game._game[0][0].state == .dead) || (game._game[0][0].state == .alive) , "I'm a zombie")
         XCTAssert(game._game.count == rows, "Wrong number of rows")
         XCTAssert(game._game[0].count == cols, "Wrong number of columns")
-        XCTAssert(game.nCols == cols)
-        XCTAssert(game.nRows == rows)
+        XCTAssert(game.size.columns == cols)
+        XCTAssert(game.size.rows == rows)
     }
 
-    func testPerformanceNeighbourCount() throws {
+    func testPerformanceUpdate() throws {
         // This is an example of a performance test case.
-        let game = GameOfLife(size: CGSize(width: 214, height: 14))
+        var game = GameOfLife(size: GameSize(rows: 14, columns: 214))
         self.measure {
-            _ = game.livingNeighboursCounts
+            game.update()
         }
     }
 
