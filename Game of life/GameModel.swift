@@ -7,61 +7,65 @@
 
 import Foundation
 
+struct GameSize {
+    let rows: Int
+    let columns: Int
+}
+
 
 struct GameOfLife {
-    internal var _game: [[State]]
-    internal let nRows: Int
-    internal let nCols: Int
+    internal var _game = [[Cell]]()
+    internal let size: GameSize
     
-    init(size: CGSize) {
-        nRows = Int(size.height)
-        nCols = Int(size.width)
-        _game = [[State]](repeating: [State](repeating: .dead, count: nCols), count: nRows)
-        for x in 0..<nRows {
-            for y in 0..<nCols {
-                _game[x][y] = Int.random(in: 1...10) > 8 ? .alive : .dead
+    init(size: GameSize) {
+        self.size = size
+        for rowNum in 0..<size.rows {
+            var row = [Cell]()
+            for colNum in 0..<size.columns {
+                let cellState: State = Int.random(in: 1...10) > 8 ? .alive : .dead
+                let newCell = Cell(row: rowNum, col: colNum, state: cellState, neighbours: [Cell]())
+                row.append(newCell)
+            }
+            _game.append(row)
+        }
+        
+        // Initialise the neighbours
+        for row in _game {
+            for cell in row {
+                _game[cell.row][cell.col].neighbours = neighboursFor(cell: cell)
             }
         }
     }
     
-    private func livingNeighbourCountFor(rowNum: Int, colNum: Int) -> Int {
-        var livingNeighbours = 0
+    func neighboursFor(cell: Cell) -> [Cell] {
+        var neighbours = [Cell]()
         for rowDelta in -1...1 {
-            let row = (rowNum + rowDelta) %% nRows
             for colDelta in -1...1 {
-                let col = (colNum + colDelta) %% nCols
                 if !((rowDelta == 0) && (colDelta == 0)) {
-                    // Don't count cell in question
-                    if _game[row][col] == .alive {
-                        livingNeighbours += 1
-                    }
+                    let neighbourRow = (cell.row - rowDelta) %% size.rows
+                    let neighbourCol = (cell.col - colDelta) %% size.columns
+                    neighbours.append(_game[neighbourRow][neighbourCol])
                 }
             }
         }
-        return livingNeighbours
+        return neighbours
     }
-    
-    var livingNeighboursCounts: [[Int]] {
-        var livingNeighboursMap = [[Int]](repeating: [Int](repeating: 0, count: nCols), count: nRows)
-        for rowNum in 0..<nRows {
-            for colNum in 0..<nCols {
-                livingNeighboursMap[rowNum][colNum] = livingNeighbourCountFor(rowNum: rowNum, colNum: colNum)
-            }
-        }
-        return livingNeighboursMap
+
+    func livingNeighboursCountFor(cell: Cell) -> Int {
+        (cell.neighbours.filter {$0.state == .alive}).count
     }
     
     mutating func update() {
-        for rowNum in 0..<nRows {
-            for colNum in 0..<nCols {
-                let livingNeighbours = livingNeighbourCountFor(rowNum: rowNum, colNum: colNum)
+        for rowNum in 0..<size.rows {
+            for colNum in 0..<size.columns {
+                let livingNeighbours = livingNeighboursCountFor(cell: _game[rowNum][colNum])
                 switch livingNeighbours {
-                case 2...3 where _game[rowNum][colNum] == .alive:
+                case 2...3 where _game[rowNum][colNum].state == .alive:
                     continue
-                case 3 where _game[rowNum][colNum] == .dead:
-                    _game[rowNum][colNum] = .alive
+                case 3 where _game[rowNum][colNum].state == .dead:
+                    _game[rowNum][colNum].state = .alive
                 default:
-                    _game[rowNum][colNum] = .dead
+                    _game[rowNum][colNum].state = .dead
                 }
             }
         }

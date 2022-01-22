@@ -60,7 +60,7 @@ class Game_of_lifeTests: XCTestCase {
 
     func testPerformanceUpdate() throws {
         // This is an example of a performance test case.
-        var game = GameOfLife(size: GameSize(rows: 14, columns: 214))
+        var game = GameOfLife(size: GameSize(rows: 100, columns: 100))
         self.measure {
             game.update()
         }
