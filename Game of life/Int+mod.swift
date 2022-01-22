@@ -9,6 +9,7 @@ import Foundation
 
 infix operator %%
 extension Int {
+    // This is a partial function, doesn't work with -ve modulus
     static func %% (_ lhs: Int, _ rhs: Int) -> Int {
         precondition(rhs > 0, "Modulus must be positive")
         let r = lhs % rhs

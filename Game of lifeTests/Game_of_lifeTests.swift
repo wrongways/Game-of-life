@@ -35,7 +35,7 @@ class Game_of_lifeTests: XCTestCase {
         }
     }
 
-    func testModNegative() throws {
+    func testNegativeNum() throws {
         for numerator in [-3, -5, -7, -11, -13, -17] {
             for modulus in 21...101 {
                 XCTAssert((numerator %% modulus) == (numerator % modulus) + modulus,
@@ -44,6 +44,8 @@ class Game_of_lifeTests: XCTestCase {
         }
     }
     
+    // Can't test for -ve modulus as the
+    // precondition exception is uncatchable
     
 
     // MARK: - Game tests

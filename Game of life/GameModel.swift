@@ -67,11 +67,11 @@ struct GameOfLife {
         var nextGame = _game
         for rowNum in 0..<size.rows {
             for colNum in 0..<size.columns {
-                let livingNeighbours = nextGame[rowNum][colNum].livingNeighboursCount
+                let livingNeighbours = _game[rowNum][colNum].livingNeighboursCount
                 switch livingNeighbours {
-                case 2...3 where nextGame[rowNum][colNum].state == .alive:
+                case 2...3 where _game[rowNum][colNum].state == .alive:
                     continue
-                case 3 where nextGame[rowNum][colNum].state == .dead:
+                case 3 where _game[rowNum][colNum].state == .dead:
                     nextGame[rowNum][colNum].state = .alive
                 default:
                     nextGame[rowNum][colNum].state = .dead
